@@ -8,7 +8,7 @@
 	print_r($me);
 
 	$yesterday = date('Y-m-d',strtotime("-1 days"));
-	$consumption = $sm->consumption($me->registration->zaehlpunkt, $yesterday." 00:00:00", $yesterday." 23:59:59");
+	$consumption = $sm->getConsumption($me->registration->zaehlpunkt, $yesterday." 00:00:00", $yesterday." 23:59:59");
 	print_r($consumption);
 	//$events = $sm->getEvents($me->registration->zaehlpunkt, "2022-10-01 00:00:00", "2022-10-31 23:59:59");
 	//print_r($events);
