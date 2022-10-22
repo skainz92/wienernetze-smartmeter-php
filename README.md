@@ -18,7 +18,7 @@ Read energy-consumption from Wiener Netze Smartmeters.
 ## Usage
 ```php
 <?php 
-  require_once("vienna-smartmeter.class.php");
+  require_once("smartmeter-vienna.class.php");
   $sm = new ViennaSmartmeter("[yourusername]", "[yourpassword]", $debug=false);
   $sm->login();
   $profile = $sm->getProfile();
