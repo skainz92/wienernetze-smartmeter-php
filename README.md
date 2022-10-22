@@ -15,5 +15,14 @@ Read energy-consumption from Wiener Netze Smartmeters.
 - deleteLimit($id): Delete limit. The id is returned with getLimits().
 - getNotifications($limit, $order): Gets notifications limited by $limit and ordered by $order.
 
+## Usage
+´´´
+<?php 
+  require_once("vienna-smartmeter.class.php");
+  $sm = new ViennaSmartmeter("[yourusername]", "[yourpassword]", $debug=false);
+  $sm->login();
+  $profile = $sm->getProfile();
+  print_r($profile);
+´´´
 ## Disclaimer
 This is not an official API of Wiener Netze.
