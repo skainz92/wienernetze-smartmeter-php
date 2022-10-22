@@ -1,0 +1,35 @@
+<?php
+	error_reporting(E_ALL);
+	ini_set("display_errors", "On");
+
+	require_once("smartmeter-vienna.class.php");
+
+	$sm = new ViennaSmartmeter("xxx", "xxx", false);
+	$sm->login();
+	$me = $sm->getProfile();
+
+	print_r($me);
+
+	$yesterday = date('Y-m-d',strtotime("-1 days"));
+	$consumption = $sm->consumption($me->registration->zaehlpunkt, $yesterday." 00:00:00", $yesterday." 23:59:59");
+	print_r($consumption);
+	//$events = $sm->getEvents($me->registration->zaehlpunkt, "2022-10-01 00:00:00", "2022-10-31 23:59:59");
+	//print_r($events);
+
+	//$sm->createEvent($me->registration->zaehlpunkt, "AUTOCREATEEVENT", "2022-10-16 13:00:00");
+
+	//$res = $sm->deleteEvent($me->registration->zaehlpunkt, "6708");
+
+	//print_r($res);
+
+	//$limit = $sm->createLimit("APILIMIT", "2022-10-31 23:59:59", "d", "10000", "gt", $me->registration->zaehlpunkt);
+	//print_r($limit);
+
+	//$limits = $sm->getLimits();
+	//print_r($limits);
+
+	//$res = $sm->deleteLimit("12054906");
+	//print_r($res);
+
+	//$notifications = $sm->getNotifications("50", "DESC");
+	//print_r($notifications);
