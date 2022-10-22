@@ -1,7 +1,4 @@
 <?php
-	error_reporting(E_ALL);
-	ini_set("display_errors", "On");
-
 	require_once("smartmeter-vienna.class.php");
 
 	$sm = new ViennaSmartmeter("[username]", "[password]", false);
