@@ -16,7 +16,7 @@ Read energy-consumption from Wiener Netze Smartmeters.
 - getNotifications($limit, $order): Gets notifications limited by $limit and ordered by $order.
 
 ## Usage
-´´´
+´´´php
 <?php 
   require_once("vienna-smartmeter.class.php");
   $sm = new ViennaSmartmeter("[yourusername]", "[yourpassword]", $debug=false);
