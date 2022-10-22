@@ -1,7 +1,7 @@
 # wienernetze-smartmeter-php
 Read energy-consumption from Wiener Netze Smartmeters.
 
-##Available Methods: 
+## Available Methods: 
 
 - login(): Login with webpage credentials
 - getProfile(): Get your profile info
@@ -15,5 +15,5 @@ Read energy-consumption from Wiener Netze Smartmeters.
 - deleteLimit($id): Delete limit. The id is returned with getLimits().
 - getNotifications($limit, $order): Gets notifications limited by $limit and ordered by $order.
 
-##Disclaimer
+## Disclaimer
 This is not an official API of Wiener Netze.
