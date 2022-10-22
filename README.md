@@ -1,5 +1,5 @@
 # wienernetze-smartmeter-php
-Read energy-consumption from Wiener Netze Smart meters.
+Read energy-consumption from Wiener Netze Smartmeters.
 
 Available Methods: 
 
