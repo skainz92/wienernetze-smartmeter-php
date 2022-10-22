@@ -4,7 +4,7 @@
 
 	require_once("smartmeter-vienna.class.php");
 
-	$sm = new ViennaSmartmeter("xxx", "xxx", false);
+	$sm = new ViennaSmartmeter("[username]", "[password]", false);
 	$sm->login();
 	$me = $sm->getProfile();
 
