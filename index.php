@@ -25,7 +25,7 @@
 	//$limits = $sm->getLimits();
 	//print_r($limits);
 
-	//$res = $sm->deleteLimit("12054906");
+	//$res = $sm->deleteLimit("12678965");
 	//print_r($res);
 
 	//$notifications = $sm->getNotifications("50", "DESC");
