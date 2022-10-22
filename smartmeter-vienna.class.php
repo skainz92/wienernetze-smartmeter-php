@@ -214,7 +214,7 @@
 			return $this->wstw("zaehlpunkt/default/welcome");
 		}
 
-		public function consumption($meterpoint, $start, $end){
+		public function getConsumption($meterpoint, $start, $end){
 			//Date Format: "%Y-%m-%dT%H:%M:%S.%f"
 			$start = str_replace(" ", "T", $start).".000Z";
 			$end = str_replace(" ", "T", $end).".999Z";
