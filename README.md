@@ -24,5 +24,8 @@ Read energy-consumption from Wiener Netze Smartmeters.
   $profile = $sm->getProfile();
   print_r($profile);
 ```
+## Requirements
+- php-curl
+
 ## Disclaimer
 This is not an official API of Wiener Netze.
