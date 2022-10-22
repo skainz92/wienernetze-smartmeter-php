@@ -14,3 +14,5 @@ Available Methods:
 - createLimit($name, $end, $period, $threshold, $type, $meterpoint): Create new Limit.
 - deleteLimit($id): Delete limit. The id is returned with getLimits().
 - getNotifications($limit, $order): Gets notifications limited by $limit and ordered by $order.
+
+Disclaimer: This is not an official API of Wiener Netze.
