@@ -14,14 +14,14 @@
 			$this->password = $password;
 			$this->AUTHURL = "https://log.wien/auth/realms/logwien/protocol/openid-connect/";
 			$this->API_URL_WSTW = "https://api.wstw.at/gateway/WN_SMART_METER_PORTAL_API_B2C/1.0/";
-    		//10.04.2023 URL Change 
-    		//Old one:
-    		//$this->API_URL_WN = "https://service.wienernetze.at/rest/smp/1.0/";
-    		//New one:
-    		$this->API_URL_WN = "https://service.wienernetze.at/sm/api/";
+    			//10.04.2023 URL Change 
+    			//Old one:
+    			//$this->API_URL_WN = "https://service.wienernetze.at/rest/smp/1.0/";
+    			//New one:
+    			$this->API_URL_WN = "https://service.wienernetze.at/sm/api/";
 
-    		$this->access_token = "";
-    		$this->debug = $debug;
+    			$this->access_token = "";
+    			$this->debug = $debug;
 		}
 
 		public function login(){
@@ -96,7 +96,7 @@
 				'Accept: application/x-www-form-urlencoded'
 			);
 
-            //print_r($headers);
+            		//print_r($headers);
 
 			$ch = curl_init();
 			curl_setopt($ch, CURLOPT_URL, $this->AUTHURL."token");
@@ -239,14 +239,14 @@
 
 			$endpoint = "messdaten/zaehlpunkt/".$meterpoint."/verbrauch";
 			$params = array(
-	            "dateFrom" => $start,
-	            "dateTo" => $end,
-	            "period" => "DAY",
-	            "dayViewResolution" => "QUARTER-HOUR",
-	            "offset" => "0",
-	            "accumulate" => "false"
-	        );
-	        return $this->wstw($endpoint, $params);
+			    "dateFrom" => $start,
+			    "dateTo" => $end,
+			    "period" => "DAY",
+			    "dayViewResolution" => "QUARTER-HOUR",
+			    "offset" => "0",
+			    "accumulate" => "false"
+			);
+			return $this->wstw($endpoint, $params);
 		}
 
 		public function getEvents($meterpoint, $start, $end){
