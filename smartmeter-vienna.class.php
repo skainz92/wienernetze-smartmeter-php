@@ -212,12 +212,16 @@
 		}
 
 		public function getProfile(){
-			//10.04.2023 URL Change 
-			//Before:
-			//return $this->wn("w/user/profile");
-			//Now:
-			return $this->wn("user/profile");
-		}
+                        //10.04.2023 URL Change 
+                        //10.04.2023 registration changed to defaultGeschaeftspartnerRegistration.
+                        //Before:
+                        //return $this->wn("w/user/profile");
+                        //Now:
+                        $return = $this->wn("user/profile");
+                        //Backwardscomp.
+                        $return->registration->zaehlpunkt = $return->defaultGeschaeftspartnerRegistration->zaehlpunkt;
+                        return $return;
+                }
 
 		public function welcome(){
 			return $this->wstw("zaehlpunkt/default/welcome");
