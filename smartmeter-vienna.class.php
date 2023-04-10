@@ -224,7 +224,12 @@
                 }
 
 		public function welcome(){
-			return $this->wstw("zaehlpunkt/default/welcome");
+			//Get meter readings from welcome-screen from wien energy web-site
+			//URL/Controller Changes 11.04.2023
+			//Before:
+			//return $this->wstw("zaehlpunkt/default/welcome");
+			//Now:
+			return $this->wstw("zaehlpunkt/meterReadings");
 		}
 
 		public function getConsumption($meterpoint, $start, $end){
