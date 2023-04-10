@@ -14,15 +14,14 @@
 			$this->password = $password;
 			$this->AUTHURL = "https://log.wien/auth/realms/logwien/protocol/openid-connect/";
 			$this->API_URL_WSTW = "https://api.wstw.at/gateway/WN_SMART_METER_PORTAL_API_B2C/1.0/";
-			//10.04.2023 URL Change 
-			//Old one:
-			//$this->API_URL_WN = "https://service.wienernetze.at/rest/smp/1.0/";
-			//New one:
-			$this->API_URL_WN = "https://service.wienernetze.at/sm/api/";
-			//Reported by mhaefele86
+    		//10.04.2023 URL Change 
+    		//Old one:
+    		//$this->API_URL_WN = "https://service.wienernetze.at/rest/smp/1.0/";
+    		//New one:
+    		$this->API_URL_WN = "https://service.wienernetze.at/sm/api/";
 
-			$this->access_token = "";
-			$this->debug = $debug;
+    		$this->access_token = "";
+    		$this->debug = $debug;
 		}
 
 		public function login(){
