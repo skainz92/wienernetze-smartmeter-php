@@ -14,9 +14,15 @@
 			$this->password = $password;
 			$this->AUTHURL = "https://log.wien/auth/realms/logwien/protocol/openid-connect/";
 			$this->API_URL_WSTW = "https://api.wstw.at/gateway/WN_SMART_METER_PORTAL_API_B2C/1.0/";
-    		$this->API_URL_WN = "https://service.wienernetze.at/rest/smp/1.0/";
-    		$this->access_token = "";
-    		$this->debug = $debug;
+			//10.04.2023 URL Change 
+			//Old one:
+			//$this->API_URL_WN = "https://service.wienernetze.at/rest/smp/1.0/";
+			//New one:
+			$this->API_URL_WN = "https://service.wienernetze.at/sm/api/";
+			//Reported by mhaefele86
+
+			$this->access_token = "";
+			$this->debug = $debug;
 		}
 
 		public function login(){
@@ -207,7 +213,11 @@
 		}
 
 		public function getProfile(){
-			return $this->wn("w/user/profile");
+			//10.04.2023 URL Change 
+			//Before:
+			//return $this->wn("w/user/profile");
+			//Now:
+			return $this->wn("user/profile");
 		}
 
 		public function welcome(){
@@ -239,7 +249,11 @@
 				"dateFrom" => $start,
 				"dateUntil" => $end
 			);
-			$endpoint = "w/user/ereignisse";
+			//10.04.2023 URL Change 
+			//Before:
+			//$endpoint = "w/user/ereignisse";
+			//Now:
+			$endpoint = "user/ereignisse";
 
 			return $this->wn($endpoint, $params);
 		}
@@ -261,14 +275,21 @@
 				"typ" => $type, 
 				"zaehlpunkt" => $meterpoint
 			);
-
-			$endpoint = "w/user/ereignis";
+			//10.04.2023 URL Change 
+			//Before:
+			//$endpoint = "w/user/ereignis";
+			//Now:
+			$endpoint = "user/ereignis";
 
 			$this->wn($endpoint, $params, "POST");
 		}
 
 		public function deleteEvent($meterpoint, $id){
-			$this->wn("w/user/ereignis/".$id, null, "DELETE");
+			//10.04.2023 URL Change 
+			//Before:
+			//$this->wn("w/user/ereignis/".$id, null, "DELETE");
+			//Now: 
+			$this->wn("user/ereignis/".$id, null, "DELETE");
 		}
 
 		public function getLimits(){
