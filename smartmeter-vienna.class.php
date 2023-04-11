@@ -219,6 +219,7 @@
                         //Now:
                         $return = $this->wn("user/profile");
                         //Backwardscomp.
+			$return->registration = (object)array();
                         $return->registration->zaehlpunkt = $return->defaultGeschaeftspartnerRegistration->zaehlpunkt;
                         return $return;
                 }
