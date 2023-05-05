@@ -233,6 +233,14 @@
 			return $this->wstw("zaehlpunkt/meterReadings");
 		}
 
+		public function getMeterPoints(){
+			$endpoint = "zaehlpunkte";
+			$result = $this->wstw($endpoint, null);
+
+			$result = $result[0]->zaehlpunkte;
+			return $result;
+		}
+
 		public function getConsumption($meterpoint, $start, $end){
 			//Date Format: "%Y-%m-%dT%H:%M:%S.%f"
 			$start = str_replace(" ", "T", $start).".000Z";
