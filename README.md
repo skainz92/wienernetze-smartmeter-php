@@ -14,6 +14,7 @@ Read energy-consumption from Wiener Netze Smartmeters.
 - createLimit($name, $end, $period, $threshold, $type, $meterpoint): Create new Limit.
 - deleteLimit($id): Delete limit. The id is returned with getLimits().
 - getNotifications($limit, $order): Gets notifications limited by $limit and ordered by $order.
+- getMeterPoints(): Gets all Meterpoints assinged to your account.
 
 ## Usage
 ```php
