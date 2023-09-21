@@ -5,6 +5,7 @@
 		private $password;
 		private $AUTHURL;
 		private $API_URL_WSTW_B2C;
+		private $API_URL_WSTW_B2B;
 		private $API_URL_WN;
 		private $access_token;
 		private $cookieData;
