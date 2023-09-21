@@ -10,6 +10,11 @@
 	$yesterday = date('Y-m-d',strtotime("-1 days"));
 	$consumption = $sm->getConsumption($me->registration->zaehlpunkt, $yesterday." 00:00:00", $yesterday." 23:59:59");
 	print_r($consumption);
+	
+	//$measurements = $sm->getMeasurements($me->registration->zaehlpunkt, $yesterday, $yesterday, "QUARTER_HOUR");
+	//print_r($measurements);
+	
+	
 	//$events = $sm->getEvents($me->registration->zaehlpunkt, "2022-10-01 00:00:00", "2022-10-31 23:59:59");
 	//print_r($events);
 

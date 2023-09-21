@@ -4,7 +4,7 @@
 		private $username;
 		private $password;
 		private $AUTHURL;
-		private $API_URL_WSTW;
+		private $API_URL_WSTW_B2C;
 		private $API_URL_WN;
 		private $access_token;
 		private $cookieData;
@@ -13,15 +13,16 @@
 			$this->username = $username;
 			$this->password = $password;
 			$this->AUTHURL = "https://log.wien/auth/realms/logwien/protocol/openid-connect/";
-			$this->API_URL_WSTW = "https://api.wstw.at/gateway/WN_SMART_METER_PORTAL_API_B2C/1.0/";
-    			//10.04.2023 URL Change 
-    			//Old one:
-    			//$this->API_URL_WN = "https://service.wienernetze.at/rest/smp/1.0/";
-    			//New one:
-    			$this->API_URL_WN = "https://service.wienernetze.at/sm/api/";
+			$this->API_URL_WSTW_B2C = "https://api.wstw.at/gateway/WN_SMART_METER_PORTAL_API_B2C/1.0/";
+			$this->API_URL_WSTW_B2B = "https://api.wstw.at/gateway/WN_SMART_METER_PORTAL_API_B2B/1.0/";
+			//10.04.2023 URL Change 
+			//Old one:
+			//$this->API_URL_WN = "https://service.wienernetze.at/rest/smp/1.0/";
+			//New one:
+			$this->API_URL_WN = "https://service.wienernetze.at/sm/api/";
 
-    			$this->access_token = "";
-    			$this->debug = $debug;
+			$this->access_token = "";
+			$this->debug = $debug;
 		}
 
 		public function login(){
@@ -96,7 +97,7 @@
 				'Accept: application/x-www-form-urlencoded'
 			);
 
-            		//print_r($headers);
+			//print_r($headers);
 
 			$ch = curl_init();
 			curl_setopt($ch, CURLOPT_URL, $this->AUTHURL."token");
@@ -164,9 +165,9 @@
 			return json_decode($body);
 		}
 
-		public function wstw($endpoint, $params=null, $method="GET"){
-			$base_url = $this->API_URL_WSTW;
-			$url = $this->API_URL_WSTW.$endpoint;
+		public function wstwb2c($endpoint, $params=null, $method="GET"){
+			$base_url = $this->API_URL_WSTW_B2C;
+			$url = $this->API_URL_WSTW_B2C.$endpoint;
 
 			$headers = array(
 				"Authorization: Bearer ".$this->access_token,
@@ -210,32 +211,80 @@
 
 			return json_decode($body);
 		}
+		
+		public function wstwb2b($endpoint, $params=null, $method="GET"){
+			$base_url = $this->API_URL_WSTW_B2B;
+			$url = $this->API_URL_WSTW_B2B.$endpoint;
+
+			$headers = array(
+				"Authorization: Bearer ".$this->access_token,
+				"X-Gateway-APIKey: 93d5d520-7cc8-11eb-99bc-ba811041b5f6",
+				"Accept: application/json"
+			);
+
+			if($method == "GET"){
+				if($params){
+					$append = "?";
+					foreach($params as $key=>$val){
+						$append .= "".$key."=".$val."&";
+					}
+					substr($append, 0, strlen($append)-1);
+					$url = $url.$append;
+				}
+			}
+
+			//print_r($url);
+			$ch = curl_init($url);
+			curl_setopt($ch, CURLOPT_HEADER, true);
+			if($method == "GET"){
+				curl_setopt($ch, CURLOPT_HTTPGET, 1);
+			}elseif($method == "DELETE"){
+				curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");
+			}elseif($method == "POST"){
+				$headers[] = "Content-Type: application/json";
+				curl_setopt($ch, CURLOPT_POST, 1);
+				curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($params));
+			}
+			curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+			$content = curl_exec($ch);
+			$header_size = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
+			curl_close($ch);
+
+			if($this->debug)
+				print_r($content);
+
+			$header = substr($content, 0, $header_size);
+			$body = substr($content, $header_size);
+
+			return json_decode($body);
+		}
 
 		public function getProfile(){
-                        //10.04.2023 URL Change 
-                        //10.04.2023 registration changed to defaultGeschaeftspartnerRegistration.
-                        //Before:
-                        //return $this->wn("w/user/profile");
-                        //Now:
-                        $return = $this->wn("user/profile");
-                        //Backwardscomp.
+			//10.04.2023 URL Change 
+			//10.04.2023 registration changed to defaultGeschaeftspartnerRegistration.
+			//Before:
+			//return $this->wn("w/user/profile");
+			//Now:
+			$return = $this->wn("user/profile");
+			//Backwardscomp.
 			$return->registration = (object)array();
-                        $return->registration->zaehlpunkt = $return->defaultGeschaeftspartnerRegistration->zaehlpunkt;
-                        return $return;
-                }
+			$return->registration->zaehlpunkt = $return->defaultGeschaeftspartnerRegistration->zaehlpunkt;
+			return $return;
+		}
 
 		public function welcome(){
 			//Get meter readings from welcome-screen from wien energy web-site
 			//URL/Controller Changes 11.04.2023
 			//Before:
-			//return $this->wstw("zaehlpunkt/default/welcome");
+			//return $this->wstwb2c("zaehlpunkt/default/welcome");
 			//Now:
-			return $this->wstw("zaehlpunkt/meterReadings");
+			return $this->wstwb2c("zaehlpunkt/meterReadings");
 		}
 
 		public function getMeterPoints(){
 			$endpoint = "zaehlpunkte";
-			$result = $this->wstw($endpoint, null);
+			$result = $this->wstwb2c($endpoint, null);
 
 			$result = $result[0]->zaehlpunkte;
 			return $result;
@@ -248,15 +297,30 @@
 
 			$endpoint = "messdaten/zaehlpunkt/".$meterpoint."/verbrauch";
 			$params = array(
-			    "dateFrom" => $start,
-			    "dateTo" => $end,
-			    "period" => "DAY",
-			    "dayViewResolution" => "QUARTER-HOUR",
-			    "offset" => "0",
-			    "accumulate" => "false"
+				"dateFrom" => $start,
+				"dateTo" => $end,
+				"period" => "DAY",
+				"dayViewResolution" => "QUARTER-HOUR",
+				"offset" => "0",
+				"accumulate" => "false"
 			);
-			return $this->wstw($endpoint, $params);
+			return $this->wstwb2c($endpoint, $params);
 		}
+		
+		public function getMeasurements($meterpoint, $start, $end, $type){
+			//Date Format: "%Y-%m-%d"
+			//Type: QUARTER_HOUR, DAY, METER_READ
+
+			$endpoint = "zaehlpunkte/messwerte";
+			$params = array(
+				"zaehlpunkt" => $meterpoint,
+				"datumVon" => $start,
+				"datumBis" => $end,
+				"wertetyp" => $type
+			);
+			return $this->wstwb2b($endpoint, $params);
+		}
+		
 
 		public function getEvents($meterpoint, $start, $end){
 			$start = $this->formatDate($start, "start");
@@ -311,14 +375,14 @@
 
 		public function getLimits(){
 			$endpoint = "radar/benachrichtigungen";
-			return $this->wstw($endpoint, null);
+			return $this->wstwb2c($endpoint, null);
 		}
 
 		public function deleteLimit($id){
 			$endpoint = "radar/benachrichtigung/".$id;
 			$method = "DELETE";
 
-			return $this->wstw($endpoint, null, $method);
+			return $this->wstwb2c($endpoint, null, $method);
 		}
 
 		public function createLimit($name, $end, $period, $threshold, $type, $meterpoint){
@@ -342,12 +406,12 @@
 				"zaehlpunktnummer" => $meterpoint
 			);
 
-			return $this->wstw($endpoint, $params, $method);
+			return $this->wstwb2c($endpoint, $params, $method);
 		}
 
 		public function getNotifications($limit, $order){
 			$endpoint = "radar/ereignisse?limit=".$limit."&order=".$order;
-			return $this->wstw($endpoint);
+			return $this->wstwb2c($endpoint);
 			
 		}
 
