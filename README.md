@@ -7,7 +7,7 @@ Read energy-consumption from Wiener Netze Smartmeters.
 - getProfile(): Get your profile info
 - welcome(): Get all Infos on the welcome-page
 - getConsumption($meterpoint, $start, $end): Get energy-consumption limited by start and end parameters
-> [!IMPORTANT]  
+-> [!IMPORTANT]  
 > Wien Energie does no longer support requests with intervals bigger than 24 hours.
 - getMeasurements($meterpoint, $start, $end, $type): Get energy-consumption (full days) limited by start and end parameters
 - getEvents($meterpoint, $start, $end): Get Events limited by start and end parameters
