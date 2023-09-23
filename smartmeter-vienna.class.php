@@ -305,7 +305,16 @@
 				"offset" => "0",
 				"accumulate" => "false"
 			);
-			return $this->wstwb2c($endpoint, $params);
+			$return = $this->wstwb2c($endpoint, $params);
+
+			// WN API always returns 24h. Filter result and return only whats needed.
+			$values = array();
+			foreach($return->values as $item){
+				if(strtotime($item->timestamp) >= strtotime($start) && strtotime($item->timestamp) <= strtotime($end)){
+					$values[] = $item;
+				}
+			}
+			return $values;
 		}
 		
 		public function getMeasurements($meterpoint, $start, $end, $type){
