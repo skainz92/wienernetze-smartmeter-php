@@ -17,8 +17,10 @@ Read energy-consumption from Wiener Netze Smartmeters.
 - getNotifications($limit, $order): Gets notifications limited by $limit and ordered by $order.
 - getMeterPoints(): Gets all Meterpoints assinged to your account.
 
+
 > [!IMPORTANT]  
 > Wien Energie does no longer support requests with intervals bigger than 24 hours.
+
 
 ## Usage
 ```php
