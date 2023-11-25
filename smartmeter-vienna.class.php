@@ -318,6 +318,21 @@
 			return $values;
 		}*/
 		
+		public function getConsumptionByDay($me, $day){
+			$day = $day."T00:00:00.000Z";
+			$endpoint = "messdaten/".$me->defaultGeschaeftspartnerRegistration->geschaeftspartner."/".$me->defaultGeschaeftspartnerRegistration->zaehlpunkt."/verbrauch";
+			$params = array(
+				"dateFrom" => $day,
+				"period" => "DAY",
+				"dayViewResolution" => "QUARTER-HOUR",
+				"offset" => "0",
+				"accumulate" => "false"
+			);
+			$return = $this->wstwb2c($endpoint, $params);
+			// WN API always returns 24h. Filter result and return only whats needed.
+			return $return->values;
+		}
+		
 		public function getMeasurements($meterpoint, $start, $end, $type){
 			//Date Format: "%Y-%m-%d"
 			//Type: QUARTER_HOUR, DAY, METER_READ
