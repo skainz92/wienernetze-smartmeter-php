@@ -6,7 +6,8 @@ Read energy-consumption from Wiener Netze Smartmeters.
 - login(): Login with webpage credentials
 - getProfile(): Get your profile info
 - welcome(): Get all Infos on the welcome-page
-- getConsumption($meterpoint, $start, $end): Get energy-consumption limited by start and end parameters 
+- getConsumption($meterpoint, $start, $end): Does no longer work. See getConsumptionByDay()
+- getConsumptionByDay($profile, $day): Get energy-consumption by $day. $profile = return from getProfile()
 - getMeasurements($meterpoint, $start, $end, $type): Get energy-consumption (full days) limited by start and end parameters
 - getEvents($meterpoint, $start, $end): Get Events limited by start and end parameters
 - createEvent($meterpoint, $name, $start, $end): Create Event
