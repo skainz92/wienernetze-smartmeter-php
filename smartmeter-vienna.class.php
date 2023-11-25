@@ -352,7 +352,7 @@
 		public function createEvent($meterpoint, $name, $start, $end=null){
 			if(!$end){
 				$type = "ZEITPUNKT";
-				$end = "None";
+				$end = null;
 			}else{
 				$type = "ZEITSPANNE"; 
 				$end = $this->formatDate($end, "end");
