@@ -8,7 +8,7 @@
 	print_r($me);
 
 	$yesterday = date('Y-m-d',strtotime("-1 days"));
-	$consumption = $sm->getConsumption($me->registration->zaehlpunkt, $yesterday." 00:00:00", $yesterday." 23:59:59");
+	$consumption = $sm->getConsumptionByDay($me, $yesterday);
 	print_r($consumption);
 	
 	//$measurements = $sm->getMeasurements($me->registration->zaehlpunkt, $yesterday, $yesterday, "QUARTER_HOUR");
