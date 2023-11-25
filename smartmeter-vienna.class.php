@@ -333,17 +333,20 @@
 			return $return->values;
 		}
 		
-		public function getMeasurements($meterpoint, $start, $end, $type){
+		public function getMeasurements($me, $start, $end, $type){
 			//Date Format: "%Y-%m-%d"
 			//Type: QUARTER_HOUR, DAY, METER_READ
+			//Info: datumVon / datumBis need to be at least 2 days apart.
 
-			$endpoint = "zaehlpunkte/messwerte";
+			$endpoint = "zaehlpunkte/".$me->defaultGeschaeftspartnerRegistration->geschaeftspartner."/".$me->defaultGeschaeftspartnerRegistration->zaehlpunkt."/messwerte";
+
 			$params = array(
-				"zaehlpunkt" => $meterpoint,
+				"zaehlpunkt" => $me->defaultGeschaeftspartnerRegistration->zaehlpunkt,
 				"datumVon" => $start,
 				"datumBis" => $end,
 				"wertetyp" => $type
 			);
+
 			return $this->wstwb2b($endpoint, $params);
 		}
 		
