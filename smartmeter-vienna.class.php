@@ -291,6 +291,7 @@
 			return $result;
 		}
 
+		/* Does no longer work. 25.11.2023
 		public function getConsumption($meterpoint, $start, $end){
 			//Date Format: "%Y-%m-%dT%H:%M:%S.%f"
 			$start = str_replace(" ", "T", $start).".000Z";
@@ -315,7 +316,7 @@
 				}
 			}
 			return $values;
-		}
+		}*/
 		
 		public function getMeasurements($meterpoint, $start, $end, $type){
 			//Date Format: "%Y-%m-%d"
