@@ -2,14 +2,17 @@
 	require_once("smartmeter-vienna.class.php");
 
 	$sm = new ViennaSmartmeter("[username]", "[password]", false);
-	$sm->login();
-	$me = $sm->getProfile();
+	if($sm->login()){
+		$me = $sm->getProfile();
 
-	print_r($me);
+		print_r($me);
 
-	$yesterday = date('Y-m-d',strtotime("-1 days"));
-	$consumption = $sm->getConsumptionByDay($me->defaultGeschaeftspartnerRegistration->zaehlpunkt, $me->defaultGeschaeftspartnerRegistration->geschaeftspartner, $yesterday);
-	print_r($consumption);
+		$yesterday = date('Y-m-d',strtotime("-1 days"));
+		$consumption = $sm->getConsumptionByDay($me->defaultGeschaeftspartnerRegistration->zaehlpunkt, $me->defaultGeschaeftspartnerRegistration->geschaeftspartner, $yesterday);
+		print_r($consumption);
+	}else{
+		echo "WN login error.";
+	}
 	
 	//$measurements = $sm->getMeasurements($me->registration->zaehlpunkt, $yesterday, $yesterday, "QUARTER_HOUR");
 	//print_r($measurements);
