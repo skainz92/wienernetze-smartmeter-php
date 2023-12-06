@@ -27,7 +27,10 @@ Read energy-consumption from Wiener Netze Smartmeters.
   $profile = $sm->getProfile();
   print_r($profile);
 
-  $consumption = $sm->getConsumptionByDay($me->defaultGeschaeftspartnerRegistration->zaehlpunkt, $me->defaultGeschaeftspartnerRegistration->geschaeftspartner, date("Y-m-d"));
+  $meterpoint = $profile->defaultGeschaeftspartnerRegistration->zaehlpunkt;
+  $customerid = $profile->defaultGeschaeftspartnerRegistration->geschaeftspartner;
+
+  $consumption = $sm->getConsumptionByDay($meterpoint, $customerid, date("Y-m-d"));
   print_r($consumption);
 
 ```
