@@ -3,7 +3,7 @@ Read energy-consumption from Wiener Netze Smartmeters.
 
 ## Available Methods: 
 
-- login(): Login with webpage credentials
+- login(): Login with [Wiener Netze webpage](https://log.wien/auth/realms/logwien/protocol/openid-connect/auth?client_id=wn-smartmeter&redirect_uri=https%3A%2F%2Fsmartmeter-web.wienernetze.at%2F&state=3f041e87-b560-4a4f-8bd9-4a75db707bd3&response_mode=fragment&response_type=code&scope=openid&nonce=8870c4d9-c087-4b8b-9b83-380dd6be2aff) credentials
 - getProfile(): Get your profile info
 - welcome(): Get all Infos on the welcome-page
 - getConsumption($meterpoint, $start, $end): Does no longer work. See getConsumptionByDay()
