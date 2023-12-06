@@ -7,7 +7,7 @@ Read energy-consumption from Wiener Netze Smartmeters.
 - getProfile(): Get your profile info
 - welcome(): Get all Infos on the welcome-page
 - getConsumption($meterpoint, $start, $end): Does no longer work. See getConsumptionByDay()
-- getConsumptionByDay($profile, $day): Get energy-consumption by $day. $profile = return from getProfile()
+- getConsumptionByDay($meterpoint, $customerid, $day): Get energy-consumption by $day.
 - getMeasurements($profile, $start, $end, $type): Get energy-consumption (full days) limited by start and end parameters
 - getEvents($meterpoint, $start, $end): Get Events limited by start and end parameters
 - createEvent($meterpoint, $name, $start, $end): Create Event
@@ -27,7 +27,7 @@ Read energy-consumption from Wiener Netze Smartmeters.
   $profile = $sm->getProfile();
   print_r($profile);
 
-  $consumption = $sm->getConsumptionByDay($profile, date("Y-m-d"));
+  $consumption = $sm->getConsumptionByDay($me->defaultGeschaeftspartnerRegistration->zaehlpunkt, $me->defaultGeschaeftspartnerRegistration->geschaeftspartner, date("Y-m-d"));
   print_r($consumption);
 
 ```
