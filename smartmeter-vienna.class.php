@@ -117,7 +117,11 @@
 			$parts = explode("\r\n\r\n", $content);
 			$body = json_decode($parts[1]);
 
-			$this->access_token = $body->access_token;
+			if(!$body->error){
+				$this->access_token = $body->access_token;
+				return true;
+			}
+			return false;
 		}
 
 		public function wn($endpoint, $params=null, $method="GET"){
