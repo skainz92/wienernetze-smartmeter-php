@@ -20,20 +20,24 @@ Read energy-consumption from Wiener Netze Smartmeters.
 
 ## Usage
 ```php
-<?php 
-  require_once("smartmeter-vienna.class.php");
-  $sm = new ViennaSmartmeter("[yourusername]", "[yourpassword]", $debug=false);
-  $sm->login();
-  $profile = $sm->getProfile();
-  print_r($profile);
+<?php
+	require_once("smartmeter-vienna.class.php");
+	$sm = new ViennaSmartmeter("[yourusername]", "[yourpassword]", $debug=false);
+	
+	if($sm->login()){
+		$profile = $sm->getProfile();
+		print_r($profile);
 
-  $meterpoint = $profile->defaultGeschaeftspartnerRegistration->zaehlpunkt;
-  $customerid = $profile->defaultGeschaeftspartnerRegistration->geschaeftspartner;
+		$meterpoint = $profile->defaultGeschaeftspartnerRegistration->zaehlpunkt;
+		$customerid = $profile->defaultGeschaeftspartnerRegistration->geschaeftspartner;
 
-  $yesterday = date('Y-m-d',strtotime("-1 days"));
+		$yesterday = date('Y-m-d',strtotime("-1 days"));
 
-  $consumption = $sm->getConsumptionByDay($meterpoint, $customerid, $yesterday);
-  print_r($consumption);
+		$consumption = $sm->getConsumptionByDay($meterpoint, $customerid, $yesterday);
+		print_r($consumption);
+	}else{
+		echo "WN login error.";
+	}
 
 ```
 ## Requirements
