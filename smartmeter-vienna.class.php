@@ -318,9 +318,9 @@
 			return $values;
 		}*/
 		
-		public function getConsumptionByDay($me, $day){
+		public function getConsumptionByDay($meterpoint, $customerid, $day){
 			$day = $day."T00:00:00.000Z";
-			$endpoint = "messdaten/".$me->defaultGeschaeftspartnerRegistration->geschaeftspartner."/".$me->defaultGeschaeftspartnerRegistration->zaehlpunkt."/verbrauch";
+			$endpoint = "messdaten/".$customerid."/".$meterpoint."/verbrauch";
 			$params = array(
 				"dateFrom" => $day,
 				"period" => "DAY",
