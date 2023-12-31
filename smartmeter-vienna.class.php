@@ -291,7 +291,12 @@
 			$endpoint = "zaehlpunkte";
 			$result = $this->wstwb2c($endpoint, null);
 
-			$result = $result[0]->zaehlpunkte;
+			if(sizeof($result)<=0){
+				$return = false;
+			}elseif(sizeof($result)==1){
+				$result = $result[0]->zaehlpunkte;
+			}
+			
 			return $result;
 		}
 
