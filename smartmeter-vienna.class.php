@@ -300,6 +300,20 @@
 			return $result;
 		}
 
+		public function getMeterPointIds(){
+			$endpoint = "zaehlpunkte";
+			$result = $this->wstwb2c($endpoint, null);
+
+			$meterpoints = array();
+
+			foreach($result as $customer){
+				foreach($customer->zaehlpunkte as $meterpoint){
+					$meterpoints[] = $meterpoint->zaehlpunktnummer;
+				}
+			}
+			return $meterpoints;
+		}
+
 		/* Does no longer work. 25.11.2023
 		public function getConsumption($meterpoint, $start, $end){
 			//Date Format: "%Y-%m-%dT%H:%M:%S.%f"
