@@ -356,15 +356,15 @@
 			return $return->values;
 		}
 		
-		public function getMeasurements($me, $start, $end, $type){
+		public function getMeasurements($meterpoint, $customerid, $start, $end, $type){
 			//Date Format: "%Y-%m-%d"
 			//Type: QUARTER_HOUR, DAY, METER_READ
 			//Info: datumVon / datumBis need to be at least 2 days apart.
 
-			$endpoint = "zaehlpunkte/".$me->defaultGeschaeftspartnerRegistration->geschaeftspartner."/".$me->defaultGeschaeftspartnerRegistration->zaehlpunkt."/messwerte";
+			$endpoint = "zaehlpunkte/".$customerid."/".$meterpoint."/messwerte";
 
 			$params = array(
-				"zaehlpunkt" => $me->defaultGeschaeftspartnerRegistration->zaehlpunkt,
+				"zaehlpunkt" => $meterpoint,
 				"datumVon" => $start,
 				"datumBis" => $end,
 				"wertetyp" => $type
